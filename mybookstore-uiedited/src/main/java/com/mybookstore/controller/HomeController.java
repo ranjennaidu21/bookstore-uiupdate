@@ -97,6 +97,67 @@ public class HomeController {
 		
 		return "bookshelf";
 	}
+	
+	@RequestMapping("/index")
+	public String indexUI(Model model, Principal principal) {
+		/*return "index";*/
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
+		List<Book> bookList = bookService.findAll();
+		model.addAttribute("bookList", bookList);
+		model.addAttribute("activeAll",true);
+		
+		return "index";
+	}
+	
+	@RequestMapping("/home-02")
+	public String home2() {
+		return "home-02";
+	}
+	
+	@RequestMapping("/home-03")
+	public String home3() {
+		return "home-03";
+	}
+	
+	@RequestMapping("/product-detail")
+	public String productDetail() {
+		return "product-detail";
+	}
+	
+	@RequestMapping("/product")
+	public String product() {
+		return "product";
+	}
+	
+	@RequestMapping("/blog")
+	public String blog() {
+		return "blog";
+	}
+	
+	@RequestMapping("/blog-detail")
+	public String blogDetail() {
+		return "blog-detail";
+	}
+	
+	@RequestMapping("/about")
+	public String about() {
+		return "about";
+	}
+	
+	@RequestMapping("/contact")
+	public String contact() {
+		return "contact";
+	}
+	
+	@RequestMapping("/shoping-cart")
+	public String shopingCart() {
+		return "shoping-cart";
+	}
 
 	@RequestMapping("/login")
 	public String login(Model model) {
