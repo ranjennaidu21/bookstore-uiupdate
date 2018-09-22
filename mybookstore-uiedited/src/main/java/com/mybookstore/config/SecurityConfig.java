@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/product-detail",
 			"/product",
 			"/blog",
+			"/blog-detail",
 			"/about",
 			"/contact",
 			"/shoping-cart",
