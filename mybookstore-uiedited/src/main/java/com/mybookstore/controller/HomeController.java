@@ -114,16 +114,6 @@ public class HomeController {
 		return "index";
 	}
 	
-	@RequestMapping("/home-02")
-	public String home2() {
-		return "home-02";
-	}
-	
-	@RequestMapping("/home-03")
-	public String home3() {
-		return "home-03";
-	}
-	
 	@RequestMapping("/product-detail")
 	public String productDetail() {
 		return "product-detail";
