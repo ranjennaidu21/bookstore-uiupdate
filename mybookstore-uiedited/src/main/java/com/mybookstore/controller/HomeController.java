@@ -118,11 +118,7 @@ public class HomeController {
 	public String productDetail() {
 		return "product-detail";
 	}
-	
-	@RequestMapping("/product")
-	public String product() {
-		return "product";
-	}
+
 	
 	@RequestMapping("/blog")
 	public String blog() {
