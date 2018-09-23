@@ -110,38 +110,44 @@ public class HomeController {
 		List<Book> bookList = bookService.findAll();
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("activeAll",true);
+		model.addAttribute("page", "indexPage");
 		
 		return "index";
 	}
 	
 	@RequestMapping("/product-detail")
-	public String productDetail() {
+	public String productDetail(Model model) {
+		model.addAttribute("page", "indexPage");
 		return "product-detail";
 	}
 
 	
 	@RequestMapping("/blog")
-	public String blog() {
+	public String blog(Model model) {
+		model.addAttribute("page", "blogPage");
 		return "blog";
 	}
 	
 	@RequestMapping("/blog-detail")
-	public String blogDetail() {
+	public String blogDetail(Model model) {
+		model.addAttribute("page", "blogPage");
 		return "blog-detail";
 	}
 	
 	@RequestMapping("/about")
-	public String about() {
+	public String about(Model model) {
+		model.addAttribute("page", "aboutPage");
 		return "about";
 	}
 	
 	@RequestMapping("/contact")
-	public String contact() {
+	public String contact(Model model) {
+		model.addAttribute("page", "contactPage");
 		return "contact";
 	}
 	
 	@RequestMapping("/shoping-cart")
-	public String shopingCart() {
+	public String shopingCart(Model model) {
 		return "shoping-cart";
 	}
 
