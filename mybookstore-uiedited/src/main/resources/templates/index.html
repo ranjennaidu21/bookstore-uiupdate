@@ -464,7 +464,7 @@
 							<img th:src="@{/image/book/}+${book.id}+'.jpg'" alt="IMG-PRODUCT"/>
 
 							<a th:href="@{/selectedBookQuickView?id=}+${book.id}" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
-								Quick View
+								View
 							</a>
 						</div>
 						
@@ -475,6 +475,7 @@
 								</a>
 
 								<span class="stext-105 cl3">
+									$<span style="text-decoration: line-through;color:red;" th:text="${#numbers.formatDecimal(book.listPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
 									$<span th:text="${#numbers.formatDecimal(book.ourPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
 								</span>
 							</div>

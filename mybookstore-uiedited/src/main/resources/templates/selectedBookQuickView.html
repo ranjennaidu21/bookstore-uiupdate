@@ -141,31 +141,31 @@
 								<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 								<div class="slick3 gallery-lb">
-									<div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+									<div class="item-slick3" th:attr="data-thumb=@{/image/book/}+${book.id}+'.png'" >
 										<div class="wrap-pic-w pos-relative">
-											<img src="/images/product-detail-01.jpg" alt="IMG-PRODUCT"/>
+											<img th:src="@{/image/book/}+${book.id}+'.png'" alt="IMG-PRODUCT"/>
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/images/product-detail-01.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{/image/book/}+${book.id}+'.png'">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+									<div class="item-slick3" th:attr="data-thumb=@{/image/book/}+${book.id}+'/2.jpg'">
 										<div class="wrap-pic-w pos-relative">
-											<img src="/images/product-detail-02.jpg" alt="IMG-PRODUCT"/>
+											<img th:src="@{/image/book/}+${book.id}+'/2.jpg'" alt="IMG-PRODUCT"/>
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/images/product-detail-02.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{/image/book/}+${book.id}+'/2.jpg'">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
 									</div>
 
-									<div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+									<div class="item-slick3" th:attr="data-thumb=@{/image/book/}+${book.id}+'/3.jpg'">
 										<div class="wrap-pic-w pos-relative">
-											<img src="/images/product-detail-03.jpg" alt="IMG-PRODUCT"/>
+											<img th:src="@{/image/book/}+${book.id}+'/3.jpg'" alt="IMG-PRODUCT"/>
 
-											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/images/product-detail-03.jpg">
+											<a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" th:href="@{/image/book/}+${book.id}+'/3.jpg'">
 												<i class="fa fa-expand"></i>
 											</a>
 										</div>
@@ -177,16 +177,17 @@
 					
 					<div class="col-md-6 col-lg-5 p-b-30">
 						<div class="p-r-50 p-t-5 p-lr-0-lg">
-							<h4 class="mtext-105 cl2 js-name-detail p-b-14">
-								<span th:text="${book.title}"></span>
+							<h4 class="mtext-105 cl2 js-name-detail p-b-14" th:text="${book.title}">
 							</h4>
 
-							<span class="mtext-106 cl2">
-								$<span th:text="${#numbers.formatDecimal(book.ourPrice, 0 , 'COMMA', 2, 'POINT')}"></span>
-							</span>
+							<p class="stext-102 cl3 p-t-23">Our Price: <span class="mtext-106 cl2" th:text="${#numbers.formatDecimal(book.ourPrice, 0 , 'COMMA', 2, 'POINT')}">
+							</span></p>
+							<p class="stext-102 cl3 p-t-23">Actual Price: <span style="text-decoration: line-through;color:red;" class="mtext-106 cl2" th:text="${#numbers.formatDecimal(book.listPrice, 0 , 'COMMA', 2, 'POINT')}">
+							</span></p>
+							<p class="stext-102 cl3 p-t-23">You Save: <span class="mtext-106 cl2" th:text="${#numbers.formatDecimal((book.listPrice - book.ourPrice), 0, 'COMMA', 2, 'POINT' )}">
+							</span></p>
 
-							<p class="stext-102 cl3 p-t-23">
-								Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+							<p class="stext-102 cl3 p-t-23" th:utext="${#strings.abbreviate(book.description, 1000)}">
 							</p>
 							
 							<!--  -->
