@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -125,6 +126,8 @@ public class HomeController {
 	
 	@RequestMapping("/blog")
 	public String blog(Model model) {
+		List<Book> bookList = bookService.findAll();
+		model.addAttribute("bookList", bookList);
 		model.addAttribute("page", "blogPage");
 		return "blog";
 	}
@@ -188,6 +191,11 @@ public class HomeController {
 		model.addAttribute("qty", 1);
 		
 		return "selectedBookQuickView";
+	}
+	
+	@RequestMapping("/help")
+	public String help() {
+		return "help-faq";
 	}
 	
 	@RequestMapping("/bookshelf")
