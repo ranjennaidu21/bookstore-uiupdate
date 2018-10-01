@@ -138,6 +138,23 @@ public class HomeController {
 		return "blog-detail";
 	}
 	
+	@RequestMapping("/blog-detail-1")
+	public String blogDetail1(Model model) {
+		model.addAttribute("page", "blogPage");
+		return "blog-detail-1";
+	}
+	
+	@RequestMapping("/blog-detail-2")
+	public String blogDetail2(Model model) {
+		model.addAttribute("page", "blogPage");
+		return "blog-detail-2";
+	}
+	@RequestMapping("/blog-detail-3")
+	public String blogDetail3(Model model) {
+		model.addAttribute("page", "blogPage");
+		return "blog-detail-3";
+	}
+	
 	@RequestMapping("/about")
 	public String about(Model model) {
 		model.addAttribute("page", "aboutPage");
