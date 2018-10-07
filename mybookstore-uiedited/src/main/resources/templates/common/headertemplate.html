@@ -22,9 +22,18 @@
 							Help and FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
+						<a sec:authorize="isAnonymous()" th:href="@{/userLogin}" class="flex-c-m trans-04 p-lr-25">
 							My Account
 						</a>
+						
+						<a sec:authorize="isAuthenticated()" th:href="@{/myProfilePage}" class="flex-c-m trans-04 p-lr-25">
+							My Account
+						</a>
+						
+						<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="flex-c-m trans-04 p-lr-25">
+							Log Out
+						</a>
+						
 					</div>
 				</div>
 			</div>
@@ -120,8 +129,16 @@
 							Help and FAQs
 						</a>
 
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
+						<a sec:authorize="isAnonymous()" th:href="@{/userLogin}" class="flex-c-m p-lr-10 trans-04">
 							My Account
+						</a>
+						
+						<a sec:authorize="isAuthenticated()" th:href="@{/myProfilePage}" class="flex-c-m p-lr-10 trans-04">
+							My Account
+						</a>
+						
+						<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="flex-c-m p-lr-10 trans-04">
+							Log Out
 						</a>
 					</div>
 				</li>

@@ -171,12 +171,41 @@ public class HomeController {
 	public String shopingCart(Model model) {
 		return "shoping-cart";
 	}
+	
+	@RequestMapping("/userLogin")
+	public String UserLogin(Model model) {
+		model.addAttribute("classActiveLogin", true);
+		return "myAccountPage";
+	}
+	
+	@RequestMapping("/myProfilePage")
+	public String myProfilePage(Model model, Principal principal) {
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
+		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userShippingList", user.getUserShippingList());
+		model.addAttribute("orderList", user.getOrderList());
+		
+		UserShipping userShipping = new UserShipping();
+		model.addAttribute("userShipping", userShipping);
+		
+		model.addAttribute("listOfCreditCards", true);
+		model.addAttribute("listOfShippingAddresses", true);
+		
+		List<String> stateList = USConstants.listOfUSStatesCode;
+		Collections.sort(stateList);
+		model.addAttribute("stateList", stateList);
+		model.addAttribute("classActiveEdit", true);
+		
+		return "myProfilePage";
+	}
 
 	@RequestMapping("/login")
 	public String login(Model model) {
 		model.addAttribute("classActiveLogin", true);
 		return "myAccount";
 	}
+	
 	
 	@RequestMapping("/hours")
 	public String hours() {
