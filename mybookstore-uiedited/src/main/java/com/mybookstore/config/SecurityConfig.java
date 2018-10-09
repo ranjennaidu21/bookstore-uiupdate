@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/blog-detail-3",
 			"/about",
 			"/contact",
-			"/selectedBookQuickView",
+			/*"/selectedBookQuickView",*/
 			"/help",
 			"/shoping-cart"	
 	};
