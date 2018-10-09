@@ -71,11 +71,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http
 			.csrf().disable().cors().disable()
-			.formLogin().failureUrl("/login?error")
-			/*.formLogin().failureUrl("/userLogin?error")*/
+			/*.formLogin().failureUrl("/login?error")*/
+			.formLogin().failureUrl("/userLogin?error")
 			/*.defaultSuccessUrl("/")*/
-			.loginPage("/login").permitAll()
-			/*.loginPage("/userLogin").permitAll()*/
+			/*.loginPage("/login").permitAll()*/
+			.loginPage("/userLogin").permitAll()
 			.and()
 			.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/?logout").deleteCookies("remember-me").permitAll()

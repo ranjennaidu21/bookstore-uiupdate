@@ -135,20 +135,20 @@
 				
 				<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 				  <li class="nav-item">
-				    <a class="nav-link active" id="pills-edit-tab" data-toggle="pill" href="#pills-edit" role="tab" aria-controls="pills-edit" aria-selected="true">Edit</a>
+				    <a class="nav-link" th:classappend="${classActiveEdit}? 'active'" id="pills-edit-tab" data-toggle="pill" href="#pills-edit" role="tab" aria-controls="pills-edit" aria-selected="true">Edit</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="pills-orders-tab" data-toggle="pill" href="#pills-orders" role="tab" aria-controls="pills-orders" aria-selected="false">Orders</a>
+				    <a class="nav-link" th:classappend="${classActiveOrders}? 'active'" id="pills-orders-tab" data-toggle="pill" href="#pills-orders" role="tab" aria-controls="pills-orders" aria-selected="false">Orders</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="pills-billing-tab" data-toggle="pill" href="#pills-billing" role="tab" aria-controls="pills-billing" aria-selected="false">Billing</a>
+				    <a class="nav-link" th:classappend="${classActiveBilling}? 'active'" id="pills-billing-tab" data-toggle="pill" href="#pills-billing" role="tab" aria-controls="pills-billing" aria-selected="false">Billing</a>
 				  </li>
 				  <li class="nav-item">
-				    <a class="nav-link" id="pills-shipping-tab" data-toggle="pill" href="#pills-shipping" role="tab" aria-controls="pills-shipping" aria-selected="false">Shipping</a>
+				    <a class="nav-link" th:classappend="${classActiveShipping}? 'active'" id="pills-shipping-tab" data-toggle="pill" href="#pills-shipping" role="tab" aria-controls="pills-shipping" aria-selected="false">Shipping</a>
 				  </li>
 				</ul>
 				<div class="tab-content" id="pills-tabContent">
-				  <div class="tab-pane fade show active" id="pills-edit" role="tabpanel" aria-labelledby="pills-edit-tab">
+				  <div class="tab-pane fade" id="pills-edit" th:classappend="${classActiveEdit}? 'show active'" role="tabpanel" aria-labelledby="pills-edit-tab" >
 				  	<div th:if="${incorrectPassword}" class="alert alert-danger" role="alert">
 				  		<strong>Incorrect Password!</strong> 
 					</div>
@@ -193,9 +193,143 @@
 					  <button id="updateUserInfoButton" type="submit" class="btn btn-primary">Save All</button>
 					</form>
 				  </div>
-				  <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">bbbb</div>
-				  <div class="tab-pane fade" id="pills-billing" role="tabpanel" aria-labelledby="pills-billing-tab">cccc</div>
-				  <div class="tab-pane fade" id="pills-shipping" role="tabpanel" aria-labelledby="pills-shipping-tab">dddd</div>
+				  <div class="tab-pane fade" id="pills-orders" th:classappend="${classActiveOrders}? 'show active'" role="tabpanel" aria-labelledby="pills-orders-tab">
+	  						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">Order Date</th>
+									<th scope="col">Order Number</th>
+									<th scope="col">Total</th>
+									<th scope="col" >Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr scope="row" th:each="order : ${orderList}">
+									<td><a th:href="@{/orderDetailPage(id=${order.id})}"><span
+											th:text="${order.orderDate}"></span></a></td>
+									<td data-th-text="${order.id}"></td>
+									<td data-th-text="${order.orderTotal}"></td>
+									<td data-th-text="${order.orderStatus}"></td>
+								</tr>
+							</tbody>
+						</table>
+				
+ 				  		<div th:if="${displayOrderDetail}">
+ 				  		<div class="card">
+						  <div class="card-body">
+						    <h5 class="card-title"><strong>Order Detail for Purchase #<span th:text="${order.id}"></span></strong></h5>
+						  </div>
+						</div>
+						
+						<div class="card">
+						  <div class="card-body">
+						    <h5 class="card-title"><strong>Billing Details</strong></h5>
+							<span
+								th:text="${order.billingAddress.billingAddressName}"></span><br />
+							<span
+								th:text="${order.billingAddress.billingAddressStreet1}+' '+${order.billingAddress.billingAddressStreet2}"></span><br />
+							<span
+								th:text="${order.billingAddress.billingAddressCity}"></span><br />
+							<span
+								th:text="${order.billingAddress.billingAddressState}"></span><br />
+							<span
+								th:text="${order.billingAddress.billingAddressZipcode}"></span><br />
+						  </div>
+						</div>
+						
+						<div class="card">
+						  <div class="card-body">
+						    <h5 class="card-title"><strong>Payment Information</strong></h5>
+								<span th:text="${order.payment.holderName}">Card
+									Name</span><br /> <span th:text="${order.payment.cardNumber}">Card
+									Number</span><br /> <span>Exp Date:</span><span
+									th:text="${order.payment.expiryMonth}"></span>/<span
+									th:text="${order.payment.expiryYear}"></span><br />
+						  </div>
+						</div>
+						
+						<div class="card">
+						  <div class="card-body">
+						    <h5 class="card-title"><strong>Shipping Details</strong></h5>
+								<span
+									th:text="${order.shippingAddress.shippingAddressName}"></span><br />
+								<span
+									th:text="${order.shippingAddress.shippingAddressStreet1}+' '+${order.shippingAddress.shippingAddressStreet2}"></span><br />
+								<span
+									th:text="${order.shippingAddress.shippingAddressCity}"></span><br />
+								<span
+									th:text="${order.shippingAddress.shippingAddressState}"></span><br />
+								<span
+									th:text="${order.shippingAddress.shippingAddressZipcode}"></span><br />
+						  </div>
+						</div>
+						
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<td><strong>Item Name</strong></td>
+									<td class="text-center"><strong>Item
+											Price</strong></td>
+									<td class="text-center"><strong>Item
+											Quantity</strong></td>
+									<td class="text-right"><strong>Total</strong></td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="cartItem : ${cartItemList}">
+									<td data-th-text="${cartItem.book.title}"></td>
+									<td class="text-center"
+										data-th-text="${cartItem.book.ourPrice}"></td>
+									<td class="text-center" data-th-text="${cartItem.qty}"></td>
+									<td class="text-center"
+										data-th-text="${cartItem.subtotal}"></td>
+								</tr>
+								<tr>
+									<td class="highrow"></td>
+									<td class="highrow"></td>
+									<td class="highrow text-center"><strong>Subtotal</strong></td>
+									<td class="highrow text-right"
+										data-th-text="${order.orderTotal}"></td>
+								</tr>
+								<tr>
+									<td class="emptyrow"></td>
+									<td class="emptyrow"></td>
+									<td class="emptyrow text-center"><strong>Tax</strong></td>
+									<td class="emptyrow text-right"
+										data-th-text="${#numbers.formatDecimal(order.orderTotal*0.06,0,2)}"></td>
+								</tr>
+								<tr>
+									<td class="emptyrow"><i
+										class="fa fa-barcode iconbig"></i></td>
+									<td class="emptyrow"></td>
+									<td class="emptyrow text-center"><strong>Total</strong></td>
+									<td
+										th:with="total=${order.orderTotal+order.orderTotal*0.06}"
+										data-th-text="${#numbers.formatDecimal(total, 0, 2)}"
+										class="emptyrow text-right"></td>
+								</tr>
+							</tbody>
+						</table>
+						</div> 
+				  </div>
+				  <div class="tab-pane fade" id="pills-billing" th:classappend="${classActiveBilling}? 'show active'" role="tabpanel" aria-labelledby="pills-billing-tab">
+					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb">
+					    <li class="breadcrumb-item"><a th:href="@{/listOfCreditCardsPage}" th:style="${listOfCreditCards}? 'color:black'">List of Credit Cards</a></li>
+					    <li class="breadcrumb-item"><a th:href="@{/addNewCreditCardPage}" th:style="${addNewCreditCard}? 'color:black'">Add(Update) Credit Card</a></li>
+					    <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+					  </ol>
+					</nav>
+				  </div>
+				  <div class="tab-pane fade" id="pills-shipping" th:classappend="${classActiveShipping}? 'show active'" role="tabpanel" aria-labelledby="pills-shipping-tab">
+				  					<nav aria-label="breadcrumb">
+					  <ol class="breadcrumb">
+					    <li class="breadcrumb-item"><a th:href="@{/listOfShippingAddressesPage}" th:style="${listOfShippingAddresses}? 'color:black'">List of Shipping Addresses</a></li>
+					    <li class="breadcrumb-item"><a th:href="@{/addNewShippingAddressPage}" th:style="${addNewShippingAddress}? 'color:black'">Add(Update) Shipping Address</a></li>
+					    <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+					  </ol>
+					</nav>
+				  </div>
 				</div>
 				</div>
 			</div>
@@ -253,9 +387,9 @@
 <!--===============================================================================================-->
 	<script th:src="@{/js/main.js}"></script>
 		<script>
-	$(document).ready(function() {
+/* 	$(document).ready(function() {
 		$("#" + "contactPage").addClass('active-menu');
-	}); 
+	});  */
 	</script>
 
 </body>
