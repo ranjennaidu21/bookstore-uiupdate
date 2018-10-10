@@ -301,6 +301,25 @@ public class HomeController {
 		return "myProfilePage";
 	}
 	
+	@RequestMapping(value="/setDefaultPaymentPage", method=RequestMethod.POST)
+	public String setDefaultPaymentPage(
+			@ModelAttribute("defaultUserPaymentId") Long defaultPaymentId, Principal principal, Model model
+			) {
+		User user = userService.findByUsername(principal.getName());
+		userService.setUserDefaultPayment(defaultPaymentId, user);
+		
+		model.addAttribute("user", user);
+		model.addAttribute("listOfCreditCards", true);
+		model.addAttribute("classActiveBilling", true);
+		model.addAttribute("listOfShippingAddresses", true);
+		
+		model.addAttribute("userPaymentList", user.getUserPaymentList());
+		model.addAttribute("userShippingList", user.getUserShippingList());
+		model.addAttribute("orderList", user.getOrderList());
+		log.debug("USERNAME:  {} SUCCESSFULLY ADDED DEFAULT BILLING CREDIT CARD INFORMATIONS ", user.getUsername());
+		return "myProfilePage";
+	}
+	
 	@RequestMapping("/listOfShippingAddressesPage")
 	public String listOfShippingAddressesPage(
 			Model model, Principal principal, HttpServletRequest request
