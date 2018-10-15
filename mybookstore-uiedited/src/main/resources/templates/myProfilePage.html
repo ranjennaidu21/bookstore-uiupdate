@@ -149,15 +149,16 @@
 				</ul>
 				<div class="tab-content" id="pills-tabContent">
 				  <div class="tab-pane fade" id="pills-edit" th:classappend="${classActiveEdit}? 'show active'" role="tabpanel" aria-labelledby="pills-edit-tab" >
-				  	<div th:if="${incorrectPassword}" class="alert alert-danger" role="alert">
-				  		<strong>Incorrect Password!</strong> 
+					<div th:if="${incorrectPassword}" class="alert alert-danger" role="alert">
+					  Incorrect Password!
 					</div>
 					
-					<div th:if="${updateSuccess}" class="alert alert-succss" role="alert">
-				  		<strong>Update Success!</strong>
+					<div th:if="${updateSuccess}" class="alert alert-success" role="alert">
+					  Update Success!
 					</div>
 
- 					<form>
+ 					<form th:action="@{/updateUserInfoPage}" method="post">
+ 					<input type="hidden" name="id" th:value="${user.id}" />
  					  <div class="row">
 					    <div class="col">
 					      <label for="formGroupExampleInput">First Name</label>
@@ -322,6 +323,12 @@
 					</nav>
 					
 					<div th:if="${listOfCreditCards}">
+					<div th:if="${updateUserPaymentInfo}" class="alert alert-success" role="alert">
+					  User Payment Info updated.
+					</div>
+					<div th:if="${deleteUserPaymentInfo}" class="alert alert-warning" role="alert">
+					  User Payment Info deleted.
+					</div>
 					<form th:action="@{/setDefaultPaymentPage}" method="post">
 						<table class="table table-bordered">
 							<thead>
@@ -338,9 +345,9 @@
 										th:checked="${userPayment.defaultPayment}" /></td>
 									<td th:text="${userPayment.cardName}"></td>
 									<td><a
-										th:href="@{/updateCreditCard(id=${userPayment.id})}"><i
+										th:href="@{/updateCreditCardPage(id=${userPayment.id})}"><i
 											class="fa fa-pencil"></i></a>&nbsp;&nbsp;<a
-										th:href="@{/removeCreditCard(id=${userPayment.id})}"><i
+										th:href="@{/removeCreditCardPage(id=${userPayment.id})}"><i
 											class="fa fa-times"></i></a></td>
 								</tr>
 							</tbody>
@@ -350,7 +357,8 @@
 				</div>
 					
 					<div th:if="${addNewCreditCard}">
-					<form th:action="@{addNewCreditCardPage}" method="post">					
+					<form th:action="@{addNewCreditCardPage}" method="post">	
+					<input hidden="hidden" name="id" th:value="${userPayment.id}" />				
  					  <div class="row">
 					    <div class="col">
 					      <label for="formGroupExampleInput">Card Name</label>
