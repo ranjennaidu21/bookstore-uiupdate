@@ -73,4 +73,27 @@ public class SearchController {
 		
 		return "bookshelf";
 	}
+	
+	@RequestMapping("/searchBookPage")
+	public String searchBookPage(
+			@ModelAttribute("keyword") String keyword,
+			Principal principal, Model model
+			) {
+		if(principal!=null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
+		List<Book> bookList = bookService.blurrySearch(keyword);
+		
+		if (bookList.isEmpty()) {
+			model.addAttribute("emptyList", true);
+			return "index";
+		}
+		
+		model.addAttribute("bookList", bookList);
+		
+		return "index";
+	}
 }
