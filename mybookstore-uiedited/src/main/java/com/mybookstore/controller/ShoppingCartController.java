@@ -54,6 +54,21 @@ public class ShoppingCartController {
 		
 		return "shoppingCart";
 	}
+	
+	@RequestMapping("/cartPage")
+	public String shoppingCartPage(Model model, Principal principal) {
+		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
+		model.addAttribute("shoppingCart", shoppingCart);
+		
+		return "shoppingCartPage";
+	}
 
 	@RequestMapping("/addItem")
 	public String addItem(
@@ -75,6 +90,26 @@ public class ShoppingCartController {
 		return "forward:/bookDetail?id="+book.getId();
 	}
 	
+	@RequestMapping("/addItemPage")
+	public String addItemPage(
+			@ModelAttribute("book") Book book,
+			@ModelAttribute("qty") String qty,
+			Model model, Principal principal
+			) {
+		User user = userService.findByUsername(principal.getName());
+		book = bookService.findOne(book.getId());
+		
+		if (Integer.parseInt(qty) > book.getInStockNumber()) {
+			model.addAttribute("notEnoughStock", true);
+			return "forward:/bookDetailPage?id="+book.getId();
+		}
+		
+		CartItem cartItem = cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty));
+		model.addAttribute("addBookSuccess", true);
+		log.debug("USERNAME:  {} loggedin. START OF SHOPPING ", user.getUsername());
+		return "forward:/bookDetailPage?id="+book.getId();
+	}
+	
 	@RequestMapping("/updateCartItem")
 	public String updateShoppingCart(
 			@ModelAttribute("id") Long cartItemId,
@@ -87,10 +122,29 @@ public class ShoppingCartController {
 		return "forward:/shoppingCart/cart";
 	}
 	
+	@RequestMapping("/updateCartItemPage")
+	public String updateShoppingCartPage(
+			@ModelAttribute("id") Long cartItemId,
+			@ModelAttribute("qty") int qty
+			) {
+		CartItem cartItem = cartItemService.findById(cartItemId);
+		cartItem.setQty(qty);
+		cartItemService.updateCartItem(cartItem);
+		
+		return "forward:/shoppingCart/cartPage";
+	}
+	
 	@RequestMapping("/removeItem")
 	public String removeItem(@RequestParam("id") Long id) {
 		cartItemService.removeCartItem(cartItemService.findById(id));
 		
 		return "forward:/shoppingCart/cart";
+	}
+	
+	@RequestMapping("/removeItemPage")
+	public String removeItemPage(@RequestParam("id") Long id) {
+		cartItemService.removeCartItem(cartItemService.findById(id));
+		
+		return "forward:/shoppingCart/cartPage";
 	}
 }

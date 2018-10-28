@@ -167,11 +167,6 @@ public class HomeController {
 		return "contact";
 	}
 	
-	@RequestMapping("/shoping-cart")
-	public String shopingCart(Model model) {
-		return "shoping-cart";
-	}
-	
 	@RequestMapping("/userLogin")
 	public String UserLogin(Model model) {
 		model.addAttribute("classActiveLogin", true);
@@ -587,6 +582,28 @@ public class HomeController {
 		model.addAttribute("qty", 1);
 		
 		return "bookDetail";
+	}
+	
+	@RequestMapping("/bookDetailPage")
+	public String bookDetailPage(
+			@PathParam("id") Long id, Model model, Principal principal
+			) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
+		Book book = bookService.findOne(id);
+		
+		model.addAttribute("book", book);
+		
+		List<Integer> qtyList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		
+		model.addAttribute("qtyList", qtyList);
+		model.addAttribute("qty", 1);
+		
+		return "selectedBookQuickView";
 	}
 
 	@RequestMapping("/forgetPassword")
