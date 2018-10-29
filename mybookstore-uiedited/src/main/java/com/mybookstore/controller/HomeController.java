@@ -211,6 +211,12 @@ public class HomeController {
 		if (userService.findByEmail(user.getEmail())!=null) {
 			if(userService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
 				model.addAttribute("emailExists", true);
+				model.addAttribute("orderList", currentUser.getOrderList());
+				model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
+				model.addAttribute("userShippingList", currentUser.getUserShippingList());
+				model.addAttribute("classActiveEdit", true);
+				model.addAttribute("listOfCreditCards", true);
+				model.addAttribute("listOfShippingAddresses", true);
 				return "myProfilePage";
 			}
 		}
@@ -219,6 +225,12 @@ public class HomeController {
 		if (userService.findByUsername(user.getUsername())!=null) {
 			if(userService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
 				model.addAttribute("usernameExists", true);
+				model.addAttribute("orderList", currentUser.getOrderList());
+				model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
+				model.addAttribute("userShippingList", currentUser.getUserShippingList());
+				model.addAttribute("classActiveEdit", true);
+				model.addAttribute("listOfCreditCards", true);
+				model.addAttribute("listOfShippingAddresses", true);
 				return "myProfilePage";
 			}
 		}
@@ -231,7 +243,12 @@ public class HomeController {
 				currentUser.setPassword(passwordEncoder.encode(newPassword));
 			} else {
 				model.addAttribute("incorrectPassword", true);
-				
+				model.addAttribute("orderList", currentUser.getOrderList());
+				model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
+				model.addAttribute("userShippingList", currentUser.getUserShippingList());
+				model.addAttribute("classActiveEdit", true);
+				model.addAttribute("listOfCreditCards", true);
+				model.addAttribute("listOfShippingAddresses", true);
 				return "myProfilePage";
 			}
 		}
@@ -256,7 +273,9 @@ public class HomeController {
 				userDetails.getAuthorities());
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
-		model.addAttribute("orderList", user.getOrderList());
+		model.addAttribute("orderList", currentUser.getOrderList());
+		model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
+		model.addAttribute("userShippingList", currentUser.getUserShippingList());
 		log.debug("USERNAME:  {} SUCCESSFULLY UPDATED USER INFORMATIONS ", user.getUsername());
 		return "myProfilePage";
 	}
