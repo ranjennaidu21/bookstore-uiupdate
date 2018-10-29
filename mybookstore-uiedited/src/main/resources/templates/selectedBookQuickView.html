@@ -126,6 +126,7 @@
 	<!-- Modal1 -->
 
 	<form th:action="@{/shoppingCart/addItemPage}" method="post">
+	<input hidden="hidden" th:field="*{book.id}" />
 	<div class="p-t-60 p-b-20">
 		<!-- <div class="overlay-modal1 js-hide-modal1"> </div> -->
 		<div class="container">
