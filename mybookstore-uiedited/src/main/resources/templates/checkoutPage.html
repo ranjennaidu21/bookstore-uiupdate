@@ -402,7 +402,7 @@
       		<!-- <form> -->
        		<div class="form-group">
 			    <label for="shippingMethod">Choose your shipping method:</label>
-				  <input class="form-check-input" type="radio" name="shippingMethod" value="groundShipping"/>
+				  <input class="form-check-input" type="radio" checked="checked" name="shippingMethod" value="groundShipping"/>
 				  <label class="form-check-label" for="groundShipping">
 				    Ground Shipping
 				  </label>
@@ -443,7 +443,7 @@
 					</p>
 					<p th:if="${cartItem.book.inStockNumber==0}"
 						style="color: darkred;">Product Unavailable</p>
-					<a th:href="@{/shoppingCart/removeItem?id=}+${cartItem.id}">delete</a>
+					<a th:href="@{/shoppingCart/removeItemPage?id=}+${cartItem.id}">delete</a>
 			      </td>
 			      <td>
 	      			<h5 style="color: #db3208; font-size: large;">

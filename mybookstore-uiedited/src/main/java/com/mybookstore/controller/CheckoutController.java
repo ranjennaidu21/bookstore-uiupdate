@@ -354,7 +354,7 @@ public class CheckoutController {
 		model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
 		System.out.println("NNNN");
 		log.debug("USERNAME:  {} COMPLETED SUBMITTING ORDER ", user.getUsername());
-		return "orderSubmittedPage";
+		return "finalorderSubmittedPage";
 	}
 
 	@RequestMapping("/setShippingAddress")
