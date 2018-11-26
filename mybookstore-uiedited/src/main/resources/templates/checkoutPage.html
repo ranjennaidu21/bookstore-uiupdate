@@ -208,9 +208,9 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="shippingZipcode">* Zipcode</label> <input
+					<label for="shippingZipcode">* Postcode</label> <input
 						type="text" class="form-control" id="shippingZipcode"
-						placeholder="Shipping Zipcode"
+						placeholder="Shipping Postcode"
 						th:name="shippingAddressZipcode" required="required"
 						th:value="${shippingAddress.shippingAddressZipcode}" />
 				</div>
@@ -319,7 +319,7 @@
 			  <br/>
 				<div class="form-group">
 					<label for="cardCVC">CV Code</label> <input id="cardCVC"
-						type="tel" class="form-control" name="cvc"
+						type="number" class="form-control" name="cvc"
 						placeholder="CVC" th:name="cvc"
 						th:value="${payment.cvc}" />
 				</div>
@@ -372,9 +372,9 @@
 					</select>
 				</div>
 				<div class="form-group">
-					<label for="billingZipcode">* Zipcode</label> <input
+					<label for="billingZipcode">* Postcode</label> <input
 						type="text" class="form-control billingAddress" id="billingZipcode"
-						placeholder="Billing Zipcode"
+						placeholder="Billing Postcode"
 						th:name="billingAddressZipcode" required="required"
 						th:value="${billingAddress.billingAddressZipcode}" />
 				</div>

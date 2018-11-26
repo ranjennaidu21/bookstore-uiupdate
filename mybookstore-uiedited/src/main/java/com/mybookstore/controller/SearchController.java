@@ -51,6 +51,34 @@ public class SearchController {
 		return "bookshelf";
 	}
 	
+	@RequestMapping("/searchByCategoryPage")
+	public String searchByCategoryPage(
+			@RequestParam("category") String category,
+			Model model, Principal principal
+			){
+		if(principal!=null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
+		String classActiveCategory = "active"+category;
+		classActiveCategory = classActiveCategory.replaceAll("\\s+", "");
+		classActiveCategory = classActiveCategory.replaceAll("&", "");
+		model.addAttribute(classActiveCategory, true);
+		
+		List<Book> bookList = bookService.findByCategory(category);
+		
+		if (bookList.isEmpty()) {
+			model.addAttribute("emptyList", true);
+			return "index";
+		}
+		
+		model.addAttribute("bookList", bookList);
+		
+		return "index";
+	}
+	
 	@RequestMapping("/searchBook")
 	public String searchBook(
 			@ModelAttribute("keyword") String keyword,

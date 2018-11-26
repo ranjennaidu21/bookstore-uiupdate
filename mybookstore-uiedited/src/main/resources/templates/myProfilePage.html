@@ -402,9 +402,9 @@
 						    </select>
 						</div>
 					 <div class="form-group">
-					    <label for="formGroupExampleInput">ZipCode</label>
+					    <label for="formGroupExampleInput">PostCode</label>
  							<input type="text" class="form-control" id="billingZipcode"
-								placeholder="Billing Zipcode"
+								placeholder="Billing Postcode"
 								th:name="userBillingZipcode" required="required"
 								th:value="${userBilling.userBillingZipcode}" />
 					  </div>
@@ -482,7 +482,7 @@
 					  <br/>
 					  <div class="form-group">
 					    <label for="formGroupExampleInput">CV Code</label>
-					    <input id="cardCVC" type="tel" class="form-control" name="cvc"
+					    <input id="cardCVC" type="number" class="form-control" name="cvc"
 							placeholder="CVC" th:name="cvc"
 							th:value="${userPayment.cvc}" />
 					 </div>
@@ -580,9 +580,9 @@
 						    </select>
 						</div>
 					 <div class="form-group">
-					    <label for="shippingZipcode">ZipCode</label>
+					    <label for="shippingZipcode">PostCode</label>
  							<input type="text" class="form-control" id="shippingZipcode"
-								placeholder="Shipping Zipcode"
+								placeholder="Shipping Postcode"
 								th:name="userShippingZipcode" required="required"
 								th:value="${userShipping.userShippingZipcode}" />
 					  </div>
@@ -629,7 +629,7 @@
 <!--===============================================================================================-->
 	<script th:src="@{/vendor/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
 	<script>
-		$('.js-pscroll').each(function(){
+	  $('.js-pscroll').each(function(){
 			$(this).css('position','relative');
 			$(this).css('overflow','hidden');
 			var ps = new PerfectScrollbar(this, {
