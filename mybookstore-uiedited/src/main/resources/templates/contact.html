@@ -138,7 +138,7 @@
 						</h4>
 
 						<div class="bor8 m-b-20 how-pos4-parent">
-							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="text" name="email" placeholder="Your Email Address"/>
+							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="Your Email Address"/>
 							<img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON"/>
 						</div>
 
@@ -166,6 +166,12 @@
 							<p class="stext-115 cl6 size-213 p-t-18">
 								Ranjen Book Store Center 8th floor, Jalan Sentul, Malaysia
 							</p>
+						</div>
+						
+						<div class="size-212 p-t-2">
+							<iframe width="350" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=sentul%20pasar&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"/>
+							<a href="https://www.pureblack.de/webdesign-darmstadt/"></a>
+							<style>.mapouter{text-align:right;height:500px;width:600px;}.gmap_canvas {overflow:hidden;background:none!important;height:500px;width:600px;}</style>
 						</div>
 					</div>
 
@@ -204,12 +210,7 @@
 			</div>
 		</div>
 	</section>	
-	
-	
-	<!-- Map -->
-	<div class="map">
-		<div class="size-303" id="google_map" data-map-x="40.691446" data-map-y="-73.886787" data-pin="images/icons/pin.png" data-scrollwhell="0" data-draggable="1" data-zoom="11"></div>
-	</div>
+
 
 <div th:replace="common/headertemplate :: bookstore-footer" />
 

@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.mybookstore.domain.Book;
 import com.mybookstore.domain.CartItem;
 import com.mybookstore.domain.Order;
+import com.mybookstore.domain.ShoppingCart;
 import com.mybookstore.domain.User;
 import com.mybookstore.domain.UserBilling;
 import com.mybookstore.domain.UserPayment;
@@ -43,6 +44,7 @@ import com.mybookstore.domain.security.UserRole;
 import com.mybookstore.service.BookService;
 import com.mybookstore.service.CartItemService;
 import com.mybookstore.service.OrderService;
+import com.mybookstore.service.ShoppingCartService;
 import com.mybookstore.service.UserPaymentService;
 import com.mybookstore.service.UserService;
 import com.mybookstore.service.UserShippingService;
@@ -82,6 +84,9 @@ public class HomeController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private ShoppingCartService shoppingCartService;
 
 	@RequestMapping("/")
 	public String index(Model model, Principal principal) {
@@ -89,6 +94,13 @@ public class HomeController {
 		if(principal != null) {
 			String username = principal.getName();
 			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
 			model.addAttribute("user", user);
 		}
 		
@@ -106,6 +118,13 @@ public class HomeController {
 		if(principal != null) {
 			String username = principal.getName();
 			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
 			model.addAttribute("user", user);
 		}
 		
@@ -125,7 +144,18 @@ public class HomeController {
 
 	
 	@RequestMapping("/blog")
-	public String blog(Model model) {
+	public String blog(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		List<Book> bookList = bookService.findAll();
 		model.addAttribute("bookList", bookList);
 		model.addAttribute("page", "blogPage");
@@ -133,36 +163,102 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/blog-detail")
-	public String blogDetail(Model model) {
+	public String blogDetail(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		model.addAttribute("page", "blogPage");
 		return "blog-detail";
 	}
 	
 	@RequestMapping("/blog-detail-1")
-	public String blogDetail1(Model model) {
+	public String blogDetail1(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		model.addAttribute("page", "blogPage");
 		return "blog-detail-1";
 	}
 	
 	@RequestMapping("/blog-detail-2")
-	public String blogDetail2(Model model) {
+	public String blogDetail2(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		model.addAttribute("page", "blogPage");
 		return "blog-detail-2";
 	}
 	@RequestMapping("/blog-detail-3")
-	public String blogDetail3(Model model) {
+	public String blogDetail3(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		model.addAttribute("page", "blogPage");
 		return "blog-detail-3";
 	}
 	
 	@RequestMapping("/about")
-	public String about(Model model) {
+	public String about(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		model.addAttribute("page", "aboutPage");
 		return "about";
 	}
 	
 	@RequestMapping("/contact")
-	public String contact(Model model) {
+	public String contact(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		model.addAttribute("page", "contactPage");
 		return "contact";
 	}
@@ -176,6 +272,13 @@ public class HomeController {
 	@RequestMapping("/myProfilePage")
 	public String myProfilePage(Model model, Principal principal) {
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
@@ -210,6 +313,13 @@ public class HomeController {
 		/*check email already exists*/
 		if (userService.findByEmail(user.getEmail())!=null) {
 			if(userService.findByEmail(user.getEmail()).getId() != currentUser.getId()) {
+				ShoppingCart shoppingCart = currentUser.getShoppingCart();
+				
+				List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+				
+				shoppingCartService.updateShoppingCart(shoppingCart);
+				
+				model.addAttribute("cartItemList", cartItemList);
 				model.addAttribute("emailExists", true);
 				model.addAttribute("orderList", currentUser.getOrderList());
 				model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
@@ -224,6 +334,13 @@ public class HomeController {
 		/*check username already exists*/
 		if (userService.findByUsername(user.getUsername())!=null) {
 			if(userService.findByUsername(user.getUsername()).getId() != currentUser.getId()) {
+				ShoppingCart shoppingCart = currentUser.getShoppingCart();
+				
+				List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+				
+				shoppingCartService.updateShoppingCart(shoppingCart);
+				
+				model.addAttribute("cartItemList", cartItemList);
 				model.addAttribute("usernameExists", true);
 				model.addAttribute("orderList", currentUser.getOrderList());
 				model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
@@ -239,9 +356,17 @@ public class HomeController {
 		if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")){
 			BCryptPasswordEncoder passwordEncoder = SecurityUtility.passwordEncoder();
 			String dbPassword = currentUser.getPassword();
+			
 			if(passwordEncoder.matches(user.getPassword(), dbPassword)){
 				currentUser.setPassword(passwordEncoder.encode(newPassword));
 			} else {
+				ShoppingCart shoppingCart = currentUser.getShoppingCart();
+				
+				List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+				
+				shoppingCartService.updateShoppingCart(shoppingCart);
+				
+				model.addAttribute("cartItemList", cartItemList);
 				model.addAttribute("incorrectPassword", true);
 				model.addAttribute("orderList", currentUser.getOrderList());
 				model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
@@ -259,6 +384,14 @@ public class HomeController {
 		currentUser.setEmail(user.getEmail());
 		
 		userService.save(currentUser);
+		
+		ShoppingCart shoppingCart = currentUser.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		
 		model.addAttribute("updateSuccess", true);
 		model.addAttribute("user", currentUser);
@@ -321,6 +454,13 @@ public class HomeController {
 			Model model, Principal principal, HttpServletRequest request
 			) {
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
@@ -338,6 +478,13 @@ public class HomeController {
 			Model model, Principal principal
 			){
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("user", user);
 		
 		model.addAttribute("addNewCreditCard", true);
@@ -368,6 +515,13 @@ public class HomeController {
 			Principal principal, Model model
 			){
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		userService.updateUserBilling(userBilling, userPayment, user);
 		
 		model.addAttribute("user", user);
@@ -387,6 +541,13 @@ public class HomeController {
 			@ModelAttribute("id") Long creditCardId, Principal principal, Model model
 			) {
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		UserPayment userPayment = userPaymentService.findById(creditCardId);
 		
 		if(user.getId() != userPayment.getUser().getId()) {
@@ -418,6 +579,13 @@ public class HomeController {
 			@ModelAttribute("id") Long creditCardId, Principal principal, Model model
 			){
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		UserPayment userPayment = userPaymentService.findById(creditCardId);
 		
 		if(user.getId() != userPayment.getUser().getId()) {
@@ -444,6 +612,13 @@ public class HomeController {
 			@ModelAttribute("defaultUserPaymentId") Long defaultPaymentId, Principal principal, Model model
 			) {
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		userService.setUserDefaultPayment(defaultPaymentId, user);
 		
 		model.addAttribute("user", user);
@@ -463,6 +638,13 @@ public class HomeController {
 			Model model, Principal principal, HttpServletRequest request
 			) {
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("user", user);
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
@@ -480,6 +662,13 @@ public class HomeController {
 			Model model, Principal principal
 			){
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		model.addAttribute("user", user);
 		
 		model.addAttribute("addNewShippingAddress", true);
@@ -506,6 +695,13 @@ public class HomeController {
 			Principal principal, Model model
 			){
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		userService.updateUserShipping(userShipping, user);
 		
 		model.addAttribute("user", user);
@@ -543,11 +739,18 @@ public class HomeController {
 	public String selectedBookQuickView(
 			@PathParam("id") Long id, Model model, Principal principal
 			) {
-/*		if(principal != null) {
+		if(principal != null) {
 			String username = principal.getName();
 			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
 			model.addAttribute("user", user);
-		}*/
+		}
 		
 		Book book = bookService.findOne(id);
 		
@@ -562,7 +765,18 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/help")
-	public String help() {
+	public String help(Model model, Principal principal) {
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
 		return "help-faq";
 	}
 	
@@ -610,6 +824,13 @@ public class HomeController {
 		if(principal != null) {
 			String username = principal.getName();
 			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
 			model.addAttribute("user", user);
 		}
 		
@@ -878,6 +1099,13 @@ public class HomeController {
 			@ModelAttribute("id") Long shippingAddressId, Principal principal, Model model
 			) {
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		UserShipping userShipping = userShippingService.findById(shippingAddressId);
 		
 		if(user.getId() != userShipping.getUser().getId()) {
@@ -946,6 +1174,13 @@ public class HomeController {
 			@ModelAttribute("defaultShippingAddressId") Long defaultShippingId, Principal principal, Model model
 			) {
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		userService.setUserDefaultShipping(defaultShippingId, user);
 		
 		model.addAttribute("user", user);
@@ -1015,6 +1250,13 @@ public class HomeController {
 			@ModelAttribute("id") Long userShippingId, Principal principal, Model model
 			){
 		User user = userService.findByUsername(principal.getName());
+		ShoppingCart shoppingCart = user.getShoppingCart();
+		
+		List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+		
+		shoppingCartService.updateShoppingCart(shoppingCart);
+		
+		model.addAttribute("cartItemList", cartItemList);
 		UserShipping userShipping = userShippingService.findById(userShippingId);
 		
 		if(user.getId() != userShipping.getUser().getId()) {
