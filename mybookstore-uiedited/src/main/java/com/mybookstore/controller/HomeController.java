@@ -327,6 +327,7 @@ public class HomeController {
 	@RequestMapping("/userLogin")
 	public String UserLogin(Model model) {
 		model.addAttribute("classActiveLogin", true);
+		log.debug("USERACTIVITYLOG: USER TRYING TO LOGIN FROM LOGIN PAGE ");
 		return "myAccountPage";
 	}
 	
@@ -355,6 +356,7 @@ public class HomeController {
 		Collections.sort(stateList);
 		model.addAttribute("stateList", stateList);
 		model.addAttribute("classActiveEdit", true);
+		log.debug("USERACTIVITYLOG:  {} START OF EDIT USER PROFILE ", user.getUsername());
 		
 		return "myProfilePage";
 	}
@@ -470,7 +472,7 @@ public class HomeController {
 		model.addAttribute("orderList", currentUser.getOrderList());
 		model.addAttribute("userPaymentList", currentUser.getUserPaymentList());
 		model.addAttribute("userShippingList", currentUser.getUserShippingList());
-		log.debug("USERNAME:  {} SUCCESSFULLY UPDATED USER INFORMATIONS ", user.getUsername());
+		log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY EDITED USER INFORMATION ", user.getUsername());
 		return "myProfilePage";
 	}
 	
@@ -565,7 +567,7 @@ public class HomeController {
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
-		
+		log.debug("USERACTIVITYLOG:  {} START OF ADDING CREDIT CARD INFORMATIONS ", user.getUsername());
 		return "myProfilePage";
 	}
 	
@@ -593,7 +595,7 @@ public class HomeController {
 		model.addAttribute("listOfShippingAddresses", true);
 		model.addAttribute("orderList", user.getOrderList());
 		model.addAttribute("updateUserPaymentInfo", true);
-		
+		log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY UPDATED CREDIT CARD INFORMATIONS ", user.getUsername());
 		return "myProfilePage";
 	}
 	
@@ -630,7 +632,7 @@ public class HomeController {
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
 			model.addAttribute("userShippingList", user.getUserShippingList());
 			model.addAttribute("orderList", user.getOrderList());
-			
+			log.debug("USERACTIVITYLOG:  {} START OF UPDATING CREDIT CARD INFORMATIONS ", user.getUsername());
 			return "myProfilePage";
 		}
 	}
@@ -663,7 +665,7 @@ public class HomeController {
 			model.addAttribute("userShippingList", user.getUserShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			model.addAttribute("deleteUserPaymentInfo", true);
-			
+			log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY REMOVED CREDIT CARD INFORMATIONS ", user.getUsername());
 			return "myProfilePage";
 		}
 	}
@@ -690,7 +692,7 @@ public class HomeController {
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
-		log.debug("USERNAME:  {} SUCCESSFULLY ADDED DEFAULT BILLING CREDIT CARD INFORMATIONS ", user.getUsername());
+		log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY ADDED DEFAULT BILLING CREDIT CARD INFORMATIONS ", user.getUsername());
 		return "myProfilePage";
 	}
 	
@@ -746,7 +748,7 @@ public class HomeController {
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
-		
+		log.debug("USERACTIVITYLOG:  {} START OF ADDING SHIPPING INFORMATION ", user.getUsername());
 		return "myProfilePage";
 	}
 	
@@ -773,7 +775,7 @@ public class HomeController {
 		model.addAttribute("listOfCreditCards", true);
 		model.addAttribute("orderList", user.getOrderList());
 		model.addAttribute("updateUserPaymentInfo", true);
-		
+		log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY UPDATED SHIPPING INFORMATION ", user.getUsername());
 		return "myProfilePage";
 	}
 	
@@ -1187,7 +1189,7 @@ public class HomeController {
 			model.addAttribute("userPaymentList", user.getUserPaymentList());
 			model.addAttribute("userShippingList", user.getUserShippingList());
 			model.addAttribute("orderList", user.getOrderList());
-			
+			log.debug("USERACTIVITYLOG:  {} START OF UPDATING SHIPPING INFORMATIONS ", user.getUsername());
 			return "myProfilePage";
 		}
 	}
@@ -1207,7 +1209,6 @@ public class HomeController {
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
-		log.debug("USERNAME:  {} SUCCESSFULLY ADDED DEFAULT BILLING CREDIT CARD INFORMATIONS ", user.getUsername());
 		return "myProfile";
 	}
 	
@@ -1226,7 +1227,6 @@ public class HomeController {
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
-		log.debug("USERNAME:  {} SUCCESSFULLY ADDED DEFAULT SHIPPING ADDRESS INFORMATIONS ", user.getUsername());
 		return "myProfile";
 	}
 	
@@ -1252,7 +1252,7 @@ public class HomeController {
 		model.addAttribute("userPaymentList", user.getUserPaymentList());
 		model.addAttribute("userShippingList", user.getUserShippingList());
 		model.addAttribute("orderList", user.getOrderList());
-		log.debug("USERNAME:  {} SUCCESSFULLY ADDED DEFAULT SHIPPING ADDRESS INFORMATIONS ", user.getUsername());
+		log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY ADDED DEFAULT SHIPPING ADDRESS INFORMATIONS ", user.getUsername());
 		return "myProfilePage";
 	}
 	
@@ -1334,7 +1334,7 @@ public class HomeController {
 			model.addAttribute("userShippingList", user.getUserShippingList());
 			model.addAttribute("orderList", user.getOrderList());
 			model.addAttribute("deleteUserPaymentInfo", true);
-			
+			log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY REMOVED SHIPPING ADDRESS INFORMATIONS ", user.getUsername());
 			return "myProfilePage";
 		}
 	}
@@ -1483,7 +1483,6 @@ public class HomeController {
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		model.addAttribute("orderList", user.getOrderList());
-		log.debug("USERNAME:  {} SUCCESSFULLY UPDATED USER INFORMATIONS ", user.getUsername());
 		return "myProfile";
 	}
 	

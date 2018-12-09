@@ -157,7 +157,6 @@ public class CheckoutController {
 			model.addAttribute("missingRequiredField", true);
 		}
 		System.out.println("HHHH");
-		log.debug("USERNAME:  {} STARTED TO ENTER INFORMATIONS ", user.getUsername());
 		return "checkout";
 
 	}
@@ -237,8 +236,7 @@ public class CheckoutController {
 		if (missingRequiredField) {
 			model.addAttribute("missingRequiredField", true);
 		}
-		System.out.println("HHHH");
-		log.debug("USERNAME:  {} STARTED TO ENTER INFORMATIONS ", user.getUsername());
+		log.debug("USERACTIVITYLOG:  {} SUCCESSFULLY CHECK OUT FROM SHOPPING CART ", user.getUsername());
 		return "checkoutPage";
 
 	}
@@ -296,7 +294,6 @@ public class CheckoutController {
 		System.out.println("MMMM");
 		model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
 		System.out.println("NNNN");
-		log.debug("USERNAME:  {} COMPLETED SUBMITTING ORDER ", user.getUsername());
 		return "orderSubmittedPage";
 	}
 	
@@ -353,7 +350,7 @@ public class CheckoutController {
 		System.out.println("MMMM");
 		model.addAttribute("estimatedDeliveryDate", estimatedDeliveryDate);
 		System.out.println("NNNN");
-		log.debug("USERNAME:  {} COMPLETED SUBMITTING ORDER ", user.getUsername());
+		log.debug("USERACTIVITYLOG:  {} COMPLETED SUBMITTING ORDER ", user.getUsername());
 		return "finalorderSubmittedPage";
 	}
 

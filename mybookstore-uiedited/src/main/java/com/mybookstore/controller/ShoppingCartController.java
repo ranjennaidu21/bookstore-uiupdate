@@ -86,7 +86,6 @@ public class ShoppingCartController {
 		
 		CartItem cartItem = cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty));
 		model.addAttribute("addBookSuccess", true);
-		log.debug("USERNAME:  {} loggedin. START OF SHOPPING ", user.getUsername());
 		return "forward:/bookDetail?id="+book.getId();
 	}
 	
@@ -106,7 +105,6 @@ public class ShoppingCartController {
 		
 		CartItem cartItem = cartItemService.addBookToCartItem(book, user, Integer.parseInt(qty));
 		model.addAttribute("addBookSuccess", true);
-		log.debug("USERNAME:  {} loggedin. START OF SHOPPING ", user.getUsername());
 		return "forward:/bookDetailPage?id="+book.getId();
 	}
 	
