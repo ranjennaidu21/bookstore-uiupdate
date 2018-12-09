@@ -132,11 +132,25 @@
 		<div class="container">
 			<div class="flex-w flex-tr">
 				<div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
-					<form>
+					<form th:action="@{/contactPost}" method="post">
 						<h4 class="mtext-105 cl2 txt-center p-b-30">
 							Send Us A Message
 						</h4>
-
+					<div th:if="${emailEmpty}" class="alert alert-danger" role="alert">
+					  Please enter email address
+					</div>
+					
+					<div th:if="${messageEmpty}" class="alert alert-danger" role="alert">
+					  Please enter message to send
+					</div>
+						
+					<div th:if="${emailNotSent}" class="alert alert-danger" role="alert">
+					  Email not sent. FAILED!
+					</div>
+					
+					<div th:if="${emailSent}" class="alert alert-success" role="alert">
+					  Email successfully sent!
+					</div>
 						<div class="bor8 m-b-20 how-pos4-parent">
 							<input class="stext-111 cl2 plh3 size-116 p-l-62 p-r-30" type="email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" placeholder="Your Email Address"/>
 							<img class="how-pos4 pointer-none" src="/images/icons/icon-email.png" alt="ICON"/>

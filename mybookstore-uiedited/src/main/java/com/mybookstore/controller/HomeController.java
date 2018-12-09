@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.websocket.server.PathParam;
 
@@ -18,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -53,6 +55,8 @@ import com.mybookstore.utility.MailConstructor;
 import com.mybookstore.utility.SecurityUtility;
 import com.mybookstore.utility.USConstants;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
+
 @Controller
 public class HomeController {
 	
@@ -87,6 +91,9 @@ public class HomeController {
 	
 	@Autowired
 	private ShoppingCartService shoppingCartService;
+	
+	@Autowired
+    private JavaMailSender sender;
 
 	@RequestMapping("/")
 	public String index(Model model, Principal principal) {
@@ -262,6 +269,60 @@ public class HomeController {
 		model.addAttribute("page", "contactPage");
 		return "contact";
 	}
+	
+	@RequestMapping(value="/contactPost", method=RequestMethod.POST)
+	public String contactPost(Model model, Principal principal,@ModelAttribute("email") String email,@ModelAttribute("msg") String msg) {
+		log.debug("EMAIL:  {} ", email);
+		log.debug("MESSAGE:  {} ", msg);
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			ShoppingCart shoppingCart = user.getShoppingCart();
+			
+			List<CartItem> cartItemList = cartItemService.findByShoppingCart(shoppingCart);
+			
+			shoppingCartService.updateShoppingCart(shoppingCart);
+			
+			model.addAttribute("cartItemList", cartItemList);
+		}
+		model.addAttribute("page", "contactPage");
+		if ( (msg == null || msg.isEmpty() || msg.equals("")) && (email == null || email.isEmpty() || email.equals("")) ){
+			model.addAttribute("messageEmpty", true);
+			model.addAttribute("emailEmpty", true);
+			return "contact";
+		}
+		
+		if ( (msg != null || !msg.isEmpty() || !msg.equals("")) && (email == null || email.isEmpty() || email.equals("")) ){
+			model.addAttribute("emailEmpty", true);
+			return "contact";
+		}
+		if ( (msg == null || msg.isEmpty() || msg.equals("")) && (email != null || !email.isEmpty() || !email.equals("")) ){
+			model.addAttribute("messageEmpty", true);
+			return "contact";
+		}
+        try {
+            sendEmail(email,msg);
+            model.addAttribute("emailSent", true);
+            model.addAttribute("emailNotSent", false);
+            //return "Email Sent!";
+        }catch(Exception ex) {
+            //return "Error in sending email: "+ex;
+            model.addAttribute("emailSent", false);
+            model.addAttribute("emailNotSent", true);
+        }
+		return "contact";
+	}
+	
+    private void sendEmail(String email, String msg) throws Exception{
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        
+        helper.setTo("ranjentest@gmail.com");
+        helper.setText(msg);
+        helper.setSubject("From: "+email);
+        
+        sender.send(message);
+    }
 	
 	@RequestMapping("/userLogin")
 	public String UserLogin(Model model) {
